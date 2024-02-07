@@ -4,10 +4,20 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     products: [],
+    productsInShop: [],
   },
   mutations: {
     loadProducts(state, products) {
       state.products = products;
+    },
+    addToShop(state, product) {
+      state.productsInShop.push(product);
+    },
+    removeFromShop(state, productId) {
+      const updatedShop = state.productsInShop.filter(
+        (item) => productId !== item.id
+      );
+      state.productsInShop = updatedShop;
     },
   },
   actions: {
@@ -15,6 +25,13 @@ export default createStore({
       axios.get("https://fakestoreapi.com/products").then((response) => {
         commit("loadProducts", response.data);
       });
+    },
+
+    addToShop({ commit }, product) {
+      commit("addToShop", product);
+    },
+    removeFromShop({ commit }, productId) {
+      commit("removeFromShop", productId);
     },
   },
   modules: {},

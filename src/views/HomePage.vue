@@ -1,14 +1,24 @@
 <template>
   <div class="home">
     <div class="products">
-      <div class="product" v-for="product in products" :key="product.id">
+      <div
+        v-for="product in products"
+        class="product"
+        :class="{ inBag: isInShop(product) }"
+        :key="product.id"
+      >
         <div
           class="product-image"
           :style="{ 'background-image': 'url(' + product.image + ')' }"
         ></div>
         <h4>{{ product.title }}</h4>
-        <p class="price">US$ {{ product.price }}</p>
-        <button>Add to bag</button>
+        <p class="price">{{ product.price.toFixed(2) }} $</p>
+        <button v-if="!isInShop(product)" @click="addToShop(product)">
+          Add to bag
+        </button>
+        <button v-else class="remove" @click="removeFromShop(product.id)">
+          Remove from shop
+        </button>
       </div>
     </div>
   </div>
@@ -24,9 +34,23 @@ export default {
     products() {
       return this.$store.state.products;
     },
+    productInShop() {
+      return this.$store.state.productsInShop;
+    },
   },
 
-  methods: {},
+  methods: {
+    addToShop(product) {
+      product.quantity = 1;
+      this.$store.dispatch("addToShop", product);
+    },
+    removeFromShop(productId) {
+      this.$store.dispatch("removeFromShop", productId);
+    },
+    isInShop(product) {
+      return this.productInShop.find((element) => element.id === product.id);
+    },
+  },
 };
 </script>
 
