@@ -10,14 +10,25 @@ export default createStore({
     loadProducts(state, products) {
       state.products = products;
     },
+    loadShop(state, products) {
+      state.productsInShop = products;
+    },
     addToShop(state, product) {
       state.productsInShop.push(product);
+      localStorage.setItem(
+        "productsInShop",
+        JSON.stringify(state.productsInShop)
+      );
     },
     removeFromShop(state, productId) {
       const updatedShop = state.productsInShop.filter(
         (item) => productId !== item.id
       );
       state.productsInShop = updatedShop;
+      localStorage.setItem(
+        "productsInShop",
+        JSON.stringify(state.productsInShop)
+      );
     },
   },
   actions: {
@@ -25,6 +36,11 @@ export default createStore({
       axios.get("https://fakestoreapi.com/products").then((response) => {
         commit("loadProducts", response.data);
       });
+    },
+    loadShop({ commit }) {
+      if (localStorage.getItem("productsInShop")) {
+        commit("loadShop", JSON.parse(localStorage.getItem("productsInShop")));
+      }
     },
 
     addToShop({ commit }, product) {
