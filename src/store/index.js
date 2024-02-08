@@ -31,7 +31,9 @@ export default createStore({
       commit("addToShop", product);
     },
     removeFromShop({ commit }, productId) {
-      commit("removeFromShop", productId);
+      if (confirm("Are you sure you want to remove the item from shop?")) {
+        commit("removeFromShop", productId);
+      }
     },
   },
   modules: {},

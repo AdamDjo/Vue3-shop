@@ -25,19 +25,17 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "HomePage",
   data() {
     return {};
   },
-  computed: {
-    products() {
-      return this.$store.state.products;
-    },
-    productInShop() {
-      return this.$store.state.productsInShop;
-    },
-  },
+  computed: mapState([
+    // map this.count to store.state.count
+    "products",
+    "productsInShop",
+  ]),
 
   methods: {
     addToShop(product) {
@@ -48,7 +46,7 @@ export default {
       this.$store.dispatch("removeFromShop", productId);
     },
     isInShop(product) {
-      return this.productInShop.find((element) => element.id === product.id);
+      return this.productsInShop.find((element) => element.id === product.id);
     },
   },
 };
