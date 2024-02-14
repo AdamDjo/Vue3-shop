@@ -5,6 +5,7 @@ export default createStore({
   state: {
     products: [],
     productsInShop: [],
+    whishList: [],
   },
   mutations: {
     loadProducts(state, products) {
@@ -13,11 +14,21 @@ export default createStore({
     loadShop(state, products) {
       state.productsInShop = products;
     },
+    loadWhishlist(state, products) {
+      state.whishList = products;
+    },
     addToShop(state, product) {
       state.productsInShop.push(product);
       localStorage.setItem(
         "productsInShop",
         JSON.stringify(state.productsInShop)
+      );
+    },
+    addToWhishlist(state, product) {
+      state.whishList.push(product);
+      localStorage.setItem(
+        "productsInWhishlist",
+        JSON.stringify(state.whishList)
       );
     },
     removeFromShop(state, productId) {
@@ -28,6 +39,16 @@ export default createStore({
       localStorage.setItem(
         "productsInShop",
         JSON.stringify(state.productsInShop)
+      );
+    },
+    removeFromWhishlist(state, productId) {
+      const updatedWhishlist = state.whishList.filter(
+        (item) => item.id != productId
+      );
+      state.whishList = updatedWhishlist;
+      localStorage.setItem(
+        "productsInWhishlist",
+        JSON.stringify(state.whishList)
       );
     },
   },
@@ -42,14 +63,29 @@ export default createStore({
         commit("loadShop", JSON.parse(localStorage.getItem("productsInShop")));
       }
     },
+    loadWhishlist({ commit }) {
+      if (localStorage.getItem("productsInWhishlist")) {
+        commit(
+          "loadWhishlist",
+          JSON.parse(localStorage.getItem("productsInWhishlist"))
+        );
+      }
+    },
 
     addToShop({ commit }, product) {
       commit("addToShop", product);
     },
+
     removeFromShop({ commit }, productId) {
       if (confirm("Are you sure you want to remove the item from shop?")) {
         commit("removeFromShop", productId);
       }
+    },
+    removeWishlist({ commit }, productId) {
+      commit("removeFromWhishlist", productId);
+    },
+    addToWhishlist({ commit }, product) {
+      commit("addToWhishlist", product);
     },
   },
   modules: {},
