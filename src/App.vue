@@ -9,11 +9,17 @@
       >Whishlist ( {{ whishlistInShop.length }} )</router-link
     >
   </div>
+
   <router-view />
+  <FooterComponent></FooterComponent>
 </template>
 
 <script>
+import FooterComponent from "@/components/Footer/FooterComponent.vue";
 export default {
+  components: {
+    FooterComponent,
+  },
   created() {
     this.$store.dispatch("loadProducts");
     this.$store.dispatch("loadShop");
@@ -31,14 +37,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/global";
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  max-width: 1280px;
-  margin: 80px auto;
+  margin-top: 100px;
 }
 
 #nav {

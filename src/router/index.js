@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Home from "../views/HomePage.vue";
-import Shop from "../views/ShoppingBasket.vue";
-import Whishlist from "../views/Whishlist.vue";
-import Product from "../views/Product.vue";
+import Home from "../views/home/HomePage.vue";
+import Shop from "../views/cart/ShoppingPage.vue";
+import Whishlist from "../views/whishlist/WhishlistPage.vue";
+import Product from "../views/product/ProductPage.vue";
 const routes = [
   {
     path: "/",
@@ -19,7 +19,7 @@ const routes = [
     name: "Whishlist",
     component: Whishlist,
   },
-  { path: "/product/:id", component: Product },
+  { path: "/product/:id", name: "Product", component: Product },
 ];
 
 const router = createRouter({
