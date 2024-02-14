@@ -16,8 +16,15 @@
         <button v-if="!isInShop(product)" @click="addToShop(product)">
           Add to bag
         </button>
+
         <button v-else class="remove" @click="removeFromShop(product.id)">
           Remove from shop
+        </button>
+        <button v-if="!isInWhishlist(product)" @click="addToWhishlist(product)">
+          Whishlist
+        </button>
+        <button v-else @click="removeFromWhishlist(product.id)">
+          Remove whishlist
         </button>
       </div>
     </div>
@@ -35,6 +42,7 @@ export default {
     // map this.count to store.state.count
     "products",
     "productsInShop",
+    "whishList",
   ]),
 
   methods: {
@@ -42,11 +50,21 @@ export default {
       product.quantity = 1;
       this.$store.dispatch("addToShop", product);
     },
+    addToWhishlist(product) {
+      product.whishlist = true;
+      this.$store.dispatch("addToWhishlist", product);
+    },
     removeFromShop(productId) {
       this.$store.dispatch("removeFromShop", productId);
     },
+    removeFromWhishlist(productId) {
+      this.$store.dispatch("removeWishlist", productId);
+    },
     isInShop(product) {
       return this.productsInShop.find((element) => element.id === product.id);
+    },
+    isInWhishlist(product) {
+      return this.whishList.find((element) => element.id === product.id);
     },
   },
 };

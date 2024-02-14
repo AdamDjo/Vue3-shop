@@ -4,6 +4,10 @@
     <router-link to="/shop"
       >Shopping Bag ( {{ productsInShop.length }} )</router-link
     >
+    -
+    <router-link to="/whishlist"
+      >Whishlist ( {{ whishlistInShop.length }} )</router-link
+    >
   </div>
   <router-view />
 </template>
@@ -13,10 +17,14 @@ export default {
   created() {
     this.$store.dispatch("loadProducts");
     this.$store.dispatch("loadShop");
+    this.$store.dispatch("loadWhishlist");
   },
   computed: {
     productsInShop() {
       return this.$store.state.productsInShop;
+    },
+    whishlistInShop() {
+      return this.$store.state.whishList;
     },
   },
 };
