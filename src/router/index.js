@@ -19,7 +19,7 @@ const routes = [
     name: "Whishlist",
     component: Whishlist,
   },
-  { path: "/product/:id", component: Product },
+  { path: "/product/:id", name: "Product", component: Product },
 ];
 
 const router = createRouter({

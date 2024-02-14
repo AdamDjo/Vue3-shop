@@ -7,25 +7,34 @@
         :class="{ inBag: isInShop(product) }"
         :key="product.id"
       >
-        <div
-          class="product-image"
-          :style="{ 'background-image': 'url(' + product.image + ')' }"
-        ></div>
-        <h4>{{ product.title }}</h4>
-        <p class="price">{{ product.price.toFixed(2) }} $</p>
-        <button v-if="!isInShop(product)" @click="addToShop(product)">
-          Add to bag
-        </button>
+        <router-link :to="'/product/' + product.id" @click.prevent>
+          <div class="informations">
+            <div
+              class="product-image"
+              :style="{ 'background-image': 'url(' + product.image + ')' }"
+            ></div>
+            <h4>{{ product.title }}</h4>
+            <p class="price">{{ product.price.toFixed(2) }} $</p>
+          </div>
+        </router-link>
+        <div class="buttons">
+          <button v-if="!isInShop(product)" @click="addToShop(product)">
+            Add to bag
+          </button>
 
-        <button v-else class="remove" @click="removeFromShop(product.id)">
-          Remove from shop
-        </button>
-        <button v-if="!isInWhishlist(product)" @click="addToWhishlist(product)">
-          Whishlist
-        </button>
-        <button v-else @click="removeFromWhishlist(product.id)">
-          Remove whishlist
-        </button>
+          <button v-else class="remove" @click="removeFromShop(product.id)">
+            Remove from shop
+          </button>
+          <button
+            v-if="!isInWhishlist(product)"
+            @click="addToWhishlist(product)"
+          >
+            Whishlist
+          </button>
+          <button v-else @click="removeFromWhishlist(product.id)">
+            Remove whishlist
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -96,7 +105,10 @@ export default {
       &.inBag {
         border: 1px solid #007bff;
       }
-
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
       .product-image {
         margin: 20px auto;
         width: 160px;
