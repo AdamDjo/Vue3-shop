@@ -31,6 +31,7 @@
 </template>
 
 <script>
+
 export default {
   name: "ProductPage",
   data() {
@@ -51,5 +52,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./sass/Product.scss";
+@import "./sass/ProductPage.scss";
 </style>

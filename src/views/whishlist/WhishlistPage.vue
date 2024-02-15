@@ -58,49 +58,5 @@ export default {
 };
 </script>
 <style lang="scss">
-.whishlist {
-  padding: 60px 0;
-  .items {
-    max-width: 800px;
-    margin: auto;
-    .item {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      padding: 40px 0;
-      border-bottom: 1px solid lightgrey;
-      position: relative;
-
-      .remove,
-      .add {
-        display: flex;
-        top: 8px;
-        right: 0;
-        font-size: 11px;
-        text-decoration: underline;
-        cursor: pointer;
-      }
-
-      .photo {
-        img {
-          width: 80px;
-        }
-      }
-
-      .description {
-        padding-left: 30px;
-        box-sizing: border-box;
-        width: 50%;
-      }
-
-      .price {
-        .amount {
-          font-size: 16px;
-          margin-left: 8px;
-          vertical-align: middle;
-        }
-      }
-    }
-  }
-}
+@import "./sass/whishlistPage.scss";
 </style>
