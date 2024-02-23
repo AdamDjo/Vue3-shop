@@ -1,26 +1,65 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="nav">
+    <router-link to="/">Home</router-link> -
+    <router-link to="/shop"
+      >Shopping Bag ( {{ productsInShop.length }} )</router-link
+    >
+    -
+    <router-link to="/whishlist"
+      >Whishlist ( {{ whishlistInShop.length }} )</router-link
+    >
+  </div>
+
+  <router-view />
+  <FooterComponent></FooterComponent>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import FooterComponent from "@/components/Footer/FooterComponent.vue";
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    FooterComponent,
+  },
+  created() {
+    this.$store.dispatch("loadProducts");
+    this.$store.dispatch("loadShop");
+    this.$store.dispatch("loadWhishlist");
+  },
+  computed: {
+    productsInShop() {
+      return this.$store.state.productsInShop;
+    },
+    whishlistInShop() {
+      return this.$store.state.whishList;
+    },
+  },
+};
 </script>
 
-<style>
+<style lang="scss">
+@import "./scss/global";
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  margin-top: 100px;
+}
+
+#nav {
+  padding: 16px 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background-color: rgb(37, 37, 37);
+  color: white;
+
+  a {
+    color: white;
+    text-decoration: none;
+
+    &.router-link-exact-active {
+      color: #007bff;
+    }
+  }
 }
 </style>
