@@ -1,4 +1,5 @@
 <template>
+  <Header></Header>
   <div id="nav">
     <router-link to="/">Home</router-link> -
     <router-link to="/shop"
@@ -15,10 +16,12 @@
 </template>
 
 <script>
+import Header from "@/components/Header/Navbar.vue";
 import FooterComponent from "@/components/Footer/FooterComponent.vue";
 export default {
   components: {
     FooterComponent,
+    Header,
   },
   created() {
     this.$store.dispatch("loadProducts");
