@@ -1,20 +1,15 @@
 <template>
-  <header :class="active ? 'nav nav-mobile nav--active' : 'nav nav--mobile'">
+  <header class="nav nav-mobile nav--active">
     <!--start nav-->
-
-    <div
-      :class="active ? 'nav__desktop nav__desktop--active' : 'nav__desktop'"
-      ref="navBar"
-    >
+    <div class="nav__desktop nav__desktop--active">
       <!--nav__desktop-->
       <div class="nav__logo nav__logo-desktop">
         <router-link to="/">
           <v-icon
-            name="pr-user"
+            name="co-home"
             fill="#69707D"
             scale="1.5"
             class="avatar__Icon"
-            @click="changeModalAuth"
           />
         </router-link>
       </div>
@@ -30,36 +25,37 @@
       </nav>
 
       <div class="nav__cart nav__cart--desktop">
-        <div class="nav__cartShopping nav__cartShopping--desktop">
+        <router-link
+          to="/shop"
+          class="nav__cartShopping nav__cartShopping--desktop"
+        >
           <v-icon
-            name="pr-user"
+            name="la-shopping-cart-solid"
             fill="#69707D"
             scale="1.5"
-            class="avatar__Icon"
-            @click="changeModalAuth"
+            class="card__Icon"
           />
-          <span
-            class="nav__cartNumber nav__cartNumber--desktop"
-            @click="changeMiniCard"
-          ></span>
-        </div>
+          <span class="nav__cartNumber nav__cartNumber--desktop">
+            {{ numProductsInShop }}</span
+          >
+        </router-link>
 
         <div class="avatar__icon">
-          <v-icon
-            name="pr-user"
-            fill="#69707D"
-            scale="1.5"
-            class="avatar__Icon"
-            @click="changeModalAuth"
-          />
-          <article class="auth" v-if="isModalAuth && isLogin">
-            <AccountAuth />
-          </article>
+          <router-link
+            to="/whishlist"
+            class="nav__cartShopping nav__cartShopping--desktop"
+          >
+            <v-icon
+              name="fc-like-placeholder"
+              fill="#69707D"
+              scale="1.5"
+              class="whishlist__icon"
+            />
+            <span class="nav__cartNumber nav__cartNumber--desktop">
+              {{ numProductsInWhishlit }}</span
+            >
+          </router-link>
         </div>
-      </div>
-
-      <div class="nav__miniCard nav__miniCard--desktop" v-if="showMiniCard">
-        <MiniCard />
       </div>
     </div>
     <!--end nav__desktop-->
@@ -97,40 +93,35 @@
       <div class="nav__logo nav__logo--mobile">
         <router-link to="/">
           <v-icon
-            name="pr-user"
+            name="co-home"
             fill="#69707D"
             scale="1.5"
             class="avatar__Icon"
-            @click="changeModalAuth"
           />
         </router-link>
       </div>
 
       <div class="nav__cart">
-        <div class="nav__cartShopping">
+        <router-link to="/shop" class="nav__cartShopping">
           <v-icon
-            name="pr-user"
+            name="la-shopping-cart-solid"
             fill="#69707D"
             scale="1.5"
-            class="avatar__Icon"
-            @click="changeModalAuth"
+            class="card__Icon"
           />
-          <span class="nav__cartNumber"></span>
-        </div>
+          <span class="nav__cartNumber"> {{ numProductsInShop }}</span>
+        </router-link>
 
-        <div class="nav__avatarImg">
-          <!-- <img src="@/assets/images/image-avatar.png" alt="avatar" class="nav__avatar" /> -->
+        <router-link to="/whishlist" class="nav__cartShopping">
           <v-icon
-            name="pr-user"
+            name="fc-like-placeholder"
             fill="#69707D"
             scale="1.5"
-            class="avatar__Icon"
+            class="whishlist__icon"
           />
-          <article class="auth"></article>
-        </div>
+          <span class="nav__cartNumber"> {{ numProductsInWhishlit }}</span>
+        </router-link>
       </div>
-
-      <div class="nav__miniCard" v-if="showMiniCard">mini</div>
     </div>
     <!-- end nav__mobile
     <Transition name="fade">
@@ -144,6 +135,18 @@
 </style>
 <script>
 export default {
-  name: "NavBar",
+  name: "HeaderComponent",
+  props: ["numProductsInShop", "numProductsInWhishlit"],
+  data() {
+    return {
+      showMenu: false,
+    };
+  },
+  methods: {
+    //mobile menu
+    toggleMenu() {
+      this.showMenu = !this.showMenu;
+    },
+  },
 };
 </script>

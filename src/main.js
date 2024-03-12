@@ -5,51 +5,15 @@ import store from "./store";
 import axios from "axios";
 import VueAxios from "vue-axios";
 import { OhVueIcon, addIcons } from "oh-vue-icons";
+
 import {
+  CoHome, //home icon
   PrUser, //user icon
-  MdKeyboardarrowleftOutlined, // icon back
-  MdCloseRound, // icon close
-  HiHeart, // icon hear just border
-  HiSolidHeart, // icon heart fill
-  MdKeyboardarrowup, // icon arrow top
-  MdKeyboardarrowdown, // icon arrow bottom
-  HiMinusSm, //icon minus
-  HiSolidPlus, // icon plus
-  BiInstagram, // instagram
-  BiTwitter, // twitter
-  CoTiktok, // tik tok
-  LaFacebookF, // facebook
-  MdPlaceSharp, // icon place or gps
-  FaSpinner, // icon  spin
-  CoAccountLogout, //icon logout
-  LaTrashAltSolid, // icon trash
-  BiEye, // icon open eye
-  BiEyeSlash, // icon close eye
+  LaShoppingCartSolid,
+  FcLikePlaceholder, //shop icon
 } from "oh-vue-icons/icons";
 
-addIcons(
-  PrUser,
-  MdKeyboardarrowleftOutlined,
-  MdCloseRound,
-  HiHeart,
-  HiSolidHeart,
-  MdKeyboardarrowup,
-  MdKeyboardarrowdown,
-  HiMinusSm,
-  HiSolidPlus,
-
-  BiInstagram,
-  BiTwitter,
-  CoTiktok,
-  LaFacebookF,
-
-  MdPlaceSharp,
-  FaSpinner,
-  CoAccountLogout,
-  LaTrashAltSolid,
-  BiEye,
-  BiEyeSlash
-);
+addIcons(CoHome, PrUser, LaShoppingCartSolid, FcLikePlaceholder);
 
 createApp(App)
   .component("v-icon", OhVueIcon)
