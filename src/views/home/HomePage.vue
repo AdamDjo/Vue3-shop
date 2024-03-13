@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <div class="products">
+    <div class="products collections__container">
       <div
         v-for="product in products"
-        class="product"
+        class="product collections__product"
         :class="{ inBag: isInShop(product) }"
         :key="product.id"
       >
