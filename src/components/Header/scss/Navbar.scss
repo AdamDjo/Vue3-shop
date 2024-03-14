@@ -15,8 +15,9 @@
   transition: all 0.4s;
   top: 0;
   z-index: 1;
-  background-color: white;
-  border-bottom: 1px solid $LightGrayishBlue;
+  background-color: white!important;
+  border-bottom: 5px solid $LightGrayishBlue;
+  margin-bottom: 20px;
   
 }
 
@@ -85,16 +86,6 @@
   }
 }
 
-.nav__miniCard {
-  position: absolute;
-  width: 94%;
-  top: 120%;
-  justify-self: center;
-  max-width: 400px;
-  background-color: white;
-  box-shadow: 2px 4px 4px $GrayishBlue;
-  border-radius: 6 px;
-}
 
 h5 {
   font-size: 0.8em;

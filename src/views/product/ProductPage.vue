@@ -1,5 +1,6 @@
 <template>
   <main class="product">
+    <div v-if="loading">Chargement en cours...</div>
     <section class="product__view">
       <div class="product__photo">
         <img :src="product.image" alt="" />
@@ -8,7 +9,7 @@
         <div class="title">{{ product.title }}</div>
         <div class="description">Description : {{ product.description }}</div>
         <div class="price">Price : {{ product.price }}</div>
-        <div class="rating">Rating : {{ product.rating.rate }}</div>
+        <!-- <div class="rating">Rating : {{ product.rating.rate }}</div> -->
       </div>
     </section>
     <section class="product__comments">
@@ -31,7 +32,6 @@
 </template>
 
 <script>
-
 export default {
   name: "ProductPage",
   data() {
@@ -40,8 +40,11 @@ export default {
     };
   },
   computed: {
+    loading() {
+      return this.$store.state.isFetching;
+    },
     products() {
-      return this.$store.state.products;
+      return this.$store.state.shoesData;
     },
   },
   created() {

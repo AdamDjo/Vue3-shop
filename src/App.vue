@@ -13,6 +13,7 @@
       >Whishlist ( {{ whishlistInShop.length }} )</router-link
     >
   </div> -->
+  <div v-if="loading">Chargement en cours...</div>
 
   <router-view />
   <FooterComponent></FooterComponent>
@@ -27,11 +28,14 @@ export default {
     Header,
   },
   created() {
-    this.$store.dispatch("loadProducts");
     this.$store.dispatch("loadShop");
     this.$store.dispatch("loadWhishlist");
+    this.$store.dispatch("getShoesData", { page: 1 });
   },
   computed: {
+    loading() {
+      return this.$store.state.isFetching;
+    },
     productsInShop() {
       return this.$store.state.productsInShop;
     },

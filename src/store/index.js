@@ -1,15 +1,21 @@
-import axios from "axios";
 import { createStore } from "vuex";
+
+const URLBASE = process.env.VUE_APP_MY_ENV_VARIABLE;
 
 export default createStore({
   state: {
-    products: [],
     productsInShop: [],
     whishList: [],
+    isFetching: false,
+    shoesData: [],
   },
   mutations: {
-    loadProducts(state, products) {
-      state.products = products;
+    // get data
+    updateShoesData(state, data) {
+      state.shoesData = data;
+    },
+    setIsFetching(state, value) {
+      state.isFetching = value;
     },
     loadShop(state, products) {
       state.productsInShop = products;
@@ -53,10 +59,25 @@ export default createStore({
     },
   },
   actions: {
-    loadProducts({ commit }) {
-      axios.get("https://fakestoreapi.com/products").then((response) => {
-        commit("loadProducts", response.data);
-      });
+    async getShoesData({ commit, state }, { page = 1 }) {
+      // Vérifiez d'abord si les données sont déjà en cours de chargement
+      if (state.isFetching) {
+        return; // Ne rien faire si les données sont déjà en cours de chargement
+      }
+
+      commit("setIsFetching", true); // Marquez les données comme étant en cours de chargement
+
+      try {
+        const response = await fetch(`${URLBASE}shoes?page=${page}`);
+        const data = await response.json();
+        if (data) {
+          commit("updateShoesData", data.data);
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        commit("setIsFetching", false); // Marquez les données comme ayant terminé le chargement, que ce soit avec succès ou en cas d'erreur
+      }
     },
     loadShop({ commit }) {
       if (localStorage.getItem("productsInShop")) {

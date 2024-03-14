@@ -12,12 +12,12 @@
       flex: 0 0 30%;
       box-sizing: border-box;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      padding: 16px;
       margin: 8px;
-     
       max-width: 270px;
       border-radius: 10px;
       text-align: center;
+      background-color: #fff; /* Ajoute une couleur de fond */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation de transition */
       @media only screen and (max-width: 769px) {
         flex: 0 0 40%;
       }
@@ -26,7 +26,11 @@
         flex: 0 0 90%;
       }
 
-  
+      &:hover{
+        transform: translateY(-5px); /* Effet de lévitation lorsqu'on survole */
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); /* Changement d'ombre lorsqu'on survole */
+    }
+      
       &.inBag {
         border: 1px solid $OrangeP;
       }
@@ -34,51 +38,45 @@
         text-decoration: none;
         color: inherit;
       }
+      .informations {
+        padding: 20px; /* Ajoute de l'espace à l'intérieur de la carte */
+    }
       .product-image {
-        margin: 20px auto;
-        width: 160px;
-        height: 140px;
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
+     
+     
+        width: 100%;
+        height: 200px; /* Hauteur de l'image */
+        background-size: cover; /* Ajuste l'image pour couvrir tout le conteneur */
+        background-position: center; /* Centre l'image */
+        border-top-left-radius: 10px; /* Arrondi le coin supérieur gauche */
+        border-top-right-radius: 10px; /* Arrondi le coin supérieur droit */
       }
-      h4 {
-        margin: 22px auto;
-        font-size: 12px;
-        max-width: 60%;
-        font-weight: normal;
-      }
+      .buttons {
+        display: flex;
+        justify-content: space-between; /* Aligne les boutons sur les côtés */
+        margin-top: 20px; /* Ajoute de l'espace au-dessus des boutons */
+    }
+    
 
-      p.price {
-        font-size: 20px;
-        font-weight: bold;
-      }
-
-      button {
-        color: #fff;
-        background-color: $OrangeP;
-        border: 1px solid $OrangeP;
-        border-radius: 100px;
-        font-weight: 400;
-        text-align: center;
-        padding: 8px 16px;
+      .buttons button {
+        padding: 10px 20px; /* Ajoute de l'espace à l'intérieur des boutons */
+        border: none;
+        border-radius: 5px;
         cursor: pointer;
-        margin: 15px 0;
-        &:hover {
-          opacity: 0.8;
-        }
-
-        &.remove {
-          background-color: transparent;
-          border: none;
-          color: black;
-          text-decoration: underline;
-        }
+    }
+    
+    .price {
+        font-weight: bold; /* Met en gras le prix */
+        color: #333; /* Couleur du texte */
+        margin-top: 10px; /* Ajoute de l'espace au-dessus du prix */
+    }
+     
+    
       }
     }
     
 
-  }
+  
   
  
      

@@ -2,37 +2,58 @@
   <div class="home">
     <div class="products collections__container">
       <div
-        v-for="product in products"
+        v-for="product in shoesData"
         class="product collections__product"
         :class="{ inBag: isInShop(product) }"
         :key="product.id"
       >
-        <router-link :to="'/product/' + product.id" @click.prevent>
-          <div class="informations">
+        <div class="informations">
+          <router-link :to="'/product/' + product.id" @click.prevent>
             <div
               class="product-image"
               :style="{ 'background-image': 'url(' + product.image + ')' }"
             ></div>
-            <h4>{{ product.title }}</h4>
-            <p class="price">{{ product.price.toFixed(2) }} $</p>
-          </div>
-        </router-link>
-        <div class="buttons">
-          <button v-if="!isInShop(product)" @click="addToShop(product)">
-            Add to bag
-          </button>
+            <h4>{{ product.name }}</h4>
+            <p class="price">{{ product.price }} $</p>
+          </router-link>
+        </div>
 
-          <button v-else class="remove" @click="removeFromShop(product.id)">
-            Remove from shop
-          </button>
+        <div class="buttons">
           <button
             v-if="!isInWhishlist(product)"
             @click="addToWhishlist(product)"
           >
-            Whishlist
+            <v-icon
+              name="bi-heart"
+              fill="#69707D"
+              scale="1.5"
+              class="whishlist__icon"
+            />
           </button>
           <button v-else @click="removeFromWhishlist(product.id)">
-            Remove whishlist
+            <v-icon
+              name="fc-like-placeholder"
+              fill="#69707D"
+              scale="1.5"
+              class="whishlist__icon"
+            />
+          </button>
+          <button v-if="!isInShop(product)" @click="addToShop(product)">
+            <v-icon
+              name="la-shopping-cart-solid"
+              fill="#69707D"
+              scale="1.5"
+              class="card__Icon"
+            />
+          </button>
+
+          <button v-else class="remove" @click="removeFromShop(product.id)">
+            <v-icon
+              name="md-removeshoppingcart-outlined"
+              fill="#69707D"
+              scale="1.5"
+              class="card__Icon"
+            />
           </button>
         </div>
       </div>
@@ -49,9 +70,10 @@ export default {
   },
   computed: mapState([
     // map this.count to store.state.count
-    "products",
+
     "productsInShop",
     "whishList",
+    "shoesData",
   ]),
 
   methods: {

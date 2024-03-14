@@ -11,9 +11,18 @@ import {
   PrUser, //user icon
   LaShoppingCartSolid,
   FcLikePlaceholder, //shop icon
+  BiHeart, //heart
+  MdRemoveshoppingcartOutlined, // inshop
 } from "oh-vue-icons/icons";
 
-addIcons(CoHome, PrUser, LaShoppingCartSolid, FcLikePlaceholder);
+addIcons(
+  CoHome,
+  PrUser,
+  LaShoppingCartSolid,
+  FcLikePlaceholder,
+  MdRemoveshoppingcartOutlined,
+  BiHeart
+);
 
 createApp(App)
   .component("v-icon", OhVueIcon)
